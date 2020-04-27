@@ -1,16 +1,16 @@
 #!/bin/bash
 # This script needs to cleans up linegering docker stuff on your dev machine
 
-function pruneImages(){
+function removeDanglingImages(){
     echo "Prune used images?"
     echo "yes/no ?"
     read userResponse
     if [[ $userResponse =~ ^(yes|Yes|Y|y|1)$ ]] ; then
-        docker image prune -a
+        docker rm $(docker image ls --filter "dangling=true")
         if [[ $? -eq 0 ]]; then
-            echo "Failed: unable to prune images"
+            echo "Failed: Removing Dangling images"
         else
-            echo "Success: Docker images are pruned"
+            echo "Success: Removed Dangling images"
         fi
     fi
 }
@@ -46,13 +46,9 @@ function killContainers(){
 }
 
 function executeScript(){
-    pruneImages
-	
-	killContainers
-
+    removeDanglingImages
+    killContainers
     removeContainers
-
-    
 }
 
 # Run shell script process #
