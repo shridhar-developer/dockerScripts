@@ -2,7 +2,7 @@
 # This script needs to cleans up linegering docker stuff on your dev machine
 
 function removeDanglingImages(){
-    echo "Prune used images?"
+    echo "Remove Dangling images?"
     echo "yes/no ?"
     read userResponse
     if [[ $userResponse =~ ^(yes|Yes|Y|y|1)$ ]] ; then
