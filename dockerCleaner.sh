@@ -3,7 +3,7 @@
 
 function removeDanglingImages(){
     echo "Remove Dangling images?"
-    echo "yes/no ?"
+    echo "yes/no ? "
     read userResponse
     if [[ $userResponse =~ ^(yes|Yes|Y|y|1)$ ]] ; then
         docker rm $(docker image ls --filter "dangling=true")
